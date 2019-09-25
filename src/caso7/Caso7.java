@@ -18,13 +18,16 @@ public class Caso7 {
     public static String data;
     public static String key;
     public static ArrayList<String> caracteres;
+    public static ArrayList<String> digitos;
     
     Caso7() {
         secretKey = null;
         data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
         key = "29dh120_dk1_3";
         caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz0123456789".split("")));
+        digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
         Collections.shuffle(caracteres);
+        Collections.shuffle(digitos);
     }
     
     private void setKey(String myKey) {
@@ -36,11 +39,8 @@ public class Caso7 {
             local_key = Arrays.copyOf(local_key, 16);
             secretKey = new SecretKeySpec(local_key, "AES");
         }
-        catch (NoSuchAlgorithmException e) {
-            //e.printStackTrace();
-        }
-        catch (UnsupportedEncodingException e) {
-            //e.printStackTrace();
+        catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -54,6 +54,7 @@ public class Caso7 {
             output = cipher.doFinal(decoder.decode(input));
         } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             //System.out.println(e.toString());
+        	return new String("-1");
         }
         return new String(output);
     }
