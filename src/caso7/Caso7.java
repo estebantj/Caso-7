@@ -60,6 +60,7 @@ public class Caso7 {
         return new String(output);
     }
     
+<<<<<<< HEAD
 <<<<<<< develop
     public void algoritmo() {
     	System.out.println(digitos);
@@ -76,6 +77,8 @@ public class Caso7 {
     
 =======
 >>>>>>> conexion con clase
+=======
+>>>>>>> Tony
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
         Logica.tantear(caracteres, digitos);
