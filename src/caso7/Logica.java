@@ -5,5 +5,6 @@ public class Logica {
 	
 	public static void tantear(String prueba) {
 		System.out.println("Prueba de un commit: " + prueba);
+		System.out.println("Funciona");
 	}
 }
