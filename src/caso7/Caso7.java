@@ -39,11 +39,8 @@ public class Caso7 {
             local_key = Arrays.copyOf(local_key, 16);
             secretKey = new SecretKeySpec(local_key, "AES");
         }
-        catch (NoSuchAlgorithmException e) {
-            //e.printStackTrace();
-        }
-        catch (UnsupportedEncodingException e) {
-            //e.printStackTrace();
+        catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -57,6 +54,7 @@ public class Caso7 {
             output = cipher.doFinal(decoder.decode(input));
         } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             //System.out.println(e.toString());
+        	return new String("-1");
         }
         return new String(output);
     }
