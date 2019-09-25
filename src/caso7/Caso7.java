@@ -28,10 +28,9 @@ public class Caso7 {
         caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
         digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
         grupos = new ArrayList<>();
-        //Collections.shuffle(caracteres);
     }
     
-    private void setKey(String myKey) {
+    private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
             byte[] local_key = myKey.getBytes("UTF-8");
@@ -45,12 +44,11 @@ public class Caso7 {
         }
     }
 
-    public String decrypt(String input, String key) {
+    public static String decrypt(String input, String key) {
         byte[] output = null;
         try {
             java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            setKey(key);
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             output = cipher.doFinal(decoder.decode(input));
         } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
@@ -61,8 +59,9 @@ public class Caso7 {
     }
     
     public static void main(String[] args) {
-    	Caso7 caso = new Caso7();
-        Logica.crearSubListas(caracteres, digitos);
+    	//Caso7 caso = new Caso7();
+    	setKey(key);
+        Logica.crearSubListas(caracteres);
         
         /*
         char charV = 'a';
