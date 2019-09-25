@@ -61,7 +61,7 @@ public class Caso7 {
     
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
-        Logica.tantear("Hola Mundo");
+        Logica.tantear(caracteres, digitos);
         
         /*
         char charV = 'a';
