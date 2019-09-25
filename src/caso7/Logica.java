@@ -21,5 +21,6 @@ public class Logica {
 		}
 		
 		System.out.println("Prueba Despues de la division: " + lista.get(0).get(1));
+		System.out.println("Tamaño de la ultima: " + lista.get(3).size());
 	}
 }
