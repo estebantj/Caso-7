@@ -63,7 +63,7 @@ public class Caso7 {
     
     public void algoritmo() {
     	
-    	for (int i=0;i<caracteres.size();i++) {
+    	for (int i=0;i<caracteres.size();i+=4) {
     		List<String> sublista = new ArrayList<>();
     		for (int j=i;i<caracteres.size();j++) {
     			if (sublista.size() == 4) {
