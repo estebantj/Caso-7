@@ -20,7 +20,7 @@ public class Caso7 {
     public static String key;
     public static ArrayList<String> caracteres;
     public static ArrayList<String> digitos;
-    public static ArrayList<ArrayList<String> > grupos;
+    public static List<List<String> > grupos;
     
     Caso7() {
         secretKey = null;
@@ -28,6 +28,7 @@ public class Caso7 {
         key = "29dh120_dk1_3";
         caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
         digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
+        grupos = new ArrayList<>();
         //Collections.shuffle(caracteres);
     }
     
