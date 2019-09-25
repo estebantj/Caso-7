@@ -65,7 +65,9 @@ public class Caso7 {
     	for (int i=0; i<24; i+=4) {
     		List<String> sublista = caracteres.subList(i, i+4);
     		System.out.println(sublista);
-    	
+    		for (String caracter: sublista) {
+    			
+    		}
     	}
     	
     	
