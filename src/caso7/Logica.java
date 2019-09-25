@@ -20,8 +20,6 @@ public class Logica {
 		    }
 		    sublist.add(caracteres.get(i));
 		}
-		
-		System.out.println("Prueba Despues de la division: " + lista);
 	}
 	
 	public void tantear() {
