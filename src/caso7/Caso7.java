@@ -59,13 +59,9 @@ public class Caso7 {
         return new String(output);
     }
     
-    public void algoritmo() {
-    	
-    }
-    
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
-        caso.algoritmo();
+        Logica.tantear("Hola Mundo");
         
         /*
         char charV = 'a';
