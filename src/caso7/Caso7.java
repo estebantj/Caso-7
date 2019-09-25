@@ -12,6 +12,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.List;
 
 public class Caso7 {
 	public static SecretKeySpec secretKey;
@@ -27,7 +28,7 @@ public class Caso7 {
         key = "29dh120_dk1_3";
         caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
         digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
-        Collections.shuffle(caracteres);
+        //Collections.shuffle(caracteres);
     }
     
     private void setKey(String myKey) {
@@ -61,6 +62,14 @@ public class Caso7 {
     
     public void algoritmo() {
     	System.out.println(digitos);
+    	for (int i=0; i<24; i+=4) {
+    		List<String> sublista = caracteres.subList(i, i+4);
+    		System.out.println(sublista);
+    		for (String caracter: sublista) {
+    			
+    		}
+    	}
+    	
     	
     }
     
