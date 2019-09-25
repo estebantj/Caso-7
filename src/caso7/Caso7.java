@@ -24,7 +24,7 @@ public class Caso7 {
         secretKey = null;
         data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
         key = "29dh120_dk1_3";
-        caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz0123456789".split("")));
+        caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
         digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
         Collections.shuffle(caracteres);
         Collections.shuffle(digitos);
