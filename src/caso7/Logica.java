@@ -22,8 +22,4 @@ public class Logica {
 		
 		System.out.println("Prueba Despues de la division: " + lista.get(0).get(1));
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Tony
