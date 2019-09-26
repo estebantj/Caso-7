@@ -1,12 +1,12 @@
 package caso7;
 
-public class Probabilidades {
+public class Probabilidades implements Comparable< Probabilidades >{
 	public String caracter;
-	public Double probabilidad;
+	public Integer prioridad;
 	
-	Probabilidades(String caracter, Double probabilidad){
+	Probabilidades(String caracter, Integer prioridad){
 		this.caracter = caracter;
-		this.probabilidad = probabilidad;
+		this.prioridad = prioridad;
 	}
 	
 	public String getCaracter() {
@@ -17,11 +17,16 @@ public class Probabilidades {
 		this.caracter = caracter;
 	}
 	
-	public Double getProbabilidad() {
-		return probabilidad;
+	public Integer getPrioridad() {
+		return prioridad;
 	}
 	
-	public void setProbabilidad(Double probabilidad) {
-		this.probabilidad = probabilidad;
+	public void setPrioridad(Integer prioridad) {
+		this.prioridad = prioridad;
 	}
+	
+	@Override
+    public int compareTo(Probabilidades o) {
+        return this.getPrioridad().compareTo(o.getPrioridad());
+    }
 }
