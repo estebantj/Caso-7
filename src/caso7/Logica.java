@@ -5,13 +5,13 @@ import java.util.Random;
 
 public class Logica {
 	/*
-	public static ArrayList<ArrayList<String>> listaDividida = new ArrayList<>();
+	public static ArrayList<ArrayList<Caracter>> listaDividida = new ArrayList<>();
 	
 	public static void crearSubListas(ArrayList<String> caracteres) {
 		for (int i = 0; i < caracteres.size(); i++) {
-		    ArrayList<String> sublist;
+		    ArrayList<Caracter> sublist;
 		    if (i % 7 == 0) {
-		        sublist = new ArrayList<String>();
+		        sublist = new ArrayList<>();
 		        listaDividida.add(sublist);
 		    } else {
 		        sublist = listaDividida.get(listaDividida.size() - 1);
@@ -19,9 +19,7 @@ public class Logica {
 		    sublist.add(caracteres.get(i));
 		}
 		//tantear();
-		while (true) {
-			tanteo2();			
-		}
+		
 	}
 	
 	

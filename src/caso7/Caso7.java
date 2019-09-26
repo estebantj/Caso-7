@@ -6,21 +6,25 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
+import java.util.Random;
 
 public class Caso7 {
     public static String data;
     public static String key;
-    public static ArrayList<Probabilidades> caracteres;
-    public static ArrayList<Probabilidades> digitos;
+    public static ArrayList<Caracter> caracteres;
+    public static ArrayList<Caracter> digitos;
     public static List<List<String> > grupos;
     public static int cantLetras;
     public static int cantDigitos;
+    public static SecretKeySpec secretKey;
     
     Caso7() {
         secretKey = null;
@@ -28,26 +32,30 @@ public class Caso7 {
         key = "29dh120_dk1_3";
         cantLetras = 26;
         cantDigitos = 10;
-        //caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
         caracteres = new ArrayList<>();
         digitos = new ArrayList<>();
-        crearCaracteres();
-        //digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
         grupos = new ArrayList<>();
+        crearCaracteres();
+        ordenar();
     }
     
-    public void crearCaracteres() {
+    private void crearCaracteres() {
+    	Random r = new Random();
 		char charV = 'a';
 		for (int i=1;i<cantLetras-1;i++) {
-			caracteres.add(new Probabilidades(String.valueOf(charV), 1.0/(double) (cantLetras)));
+			caracteres.add(new Caracter(String.valueOf(charV), r.nextDouble()));
 			charV ++;
 		}
 		char num = '1';
 		for (int i=1; i<9; i++) {
-			caracteres.add(new Probabilidades(String.valueOf(num), 1.0/ (double) (cantDigitos)));
+			caracteres.add(new Caracter(String.valueOf(num), r.nextDouble()));
 			num ++;
 		}
 	}
+    
+    private void ordenar() {
+    	Collections.sort(caracteres, Collections.reverseOrder());
+    }
    
     private static void setKey(String myKey) {
         MessageDigest sha = null;

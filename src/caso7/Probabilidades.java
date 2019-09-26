@@ -1,11 +1,35 @@
 package caso7;
 
-public class Probabilidades {
+public class Caracter implements Comparable< Caracter > {
 	String caracter;
 	double proba;
 	
-	Probabilidades(String pCaracter, double pProba) {
+	Caracter(String pCaracter, double pProba) {
 		caracter=  pCaracter;
 		proba = pProba;
+	}
+		
+	public String getCaracter() {
+		return caracter;
+	}
+
+	public double getProba() {
+		return proba;
+	}
+
+	public void setProba(double proba) {
+		this.proba = proba;
+	}
+
+	@Override
+	public String toString() {
+		return "Caracter [caracter=" + caracter + ", proba=" + proba + "]";
+	}
+
+	@Override
+	public int compareTo(Caracter e) {
+		if (this.getProba() < e.getProba()) return -1;
+		if (this.getProba() > e.getProba()) return 1;
+		return 0;
 	}
 }
