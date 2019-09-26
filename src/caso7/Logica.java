@@ -38,9 +38,10 @@ public class Logica {
                 System.out.println("Letra usada: " + charV + ", numero usado: " + numV);
                 
 				canTanteos++;
-			}
-			if(!resultado.equals("-1")) {
-				llaveEncontrada = true;
+				if(!resultado.equals("-1")) {
+					llaveEncontrada = true;
+					break;
+				}
 			}
 		}
 		System.out.println("Cantidad de tanteos: " + canTanteos);
