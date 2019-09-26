@@ -17,20 +17,39 @@ public class Caso7 {
 	public static SecretKeySpec secretKey;
     public static String data;
     public static String key;
-    public static ArrayList<String> caracteres;
-    public static ArrayList<String> digitos;
+    public static ArrayList<Probabilidades> caracteres;
+    public static ArrayList<Probabilidades> digitos;
     public static List<List<String> > grupos;
     public static int cantLetras;
+    public static int cantDigitos;
     
     Caso7() {
         secretKey = null;
         data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
         key = "29dh120_dk1_3";
-        caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
-        digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
+        cantLetras = 26;
+        cantDigitos = 10;
+        //caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
+        caracteres = new ArrayList<>();
+        digitos = new ArrayList<>();
+        crearCaracteres();
+        //digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
         grupos = new ArrayList<>();
     }
     
+    public void crearCaracteres() {
+		char charV = 'a';
+		for (int i=1;i<cantLetras-1;i++) {
+			caracteres.add(new Probabilidades(String.valueOf(charV), 1.0/(double) (cantLetras)));
+			charV += i;
+		}
+		char num = '1';
+		for (int i=1; i<9; i++) {
+			caracteres.add(new Probabilidades(String.valueOf(num), 1.0/ (double) (cantDigitos)));
+			num += i;
+		}
+	}
+   
     private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
@@ -62,7 +81,8 @@ public class Caso7 {
     
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
+    	System.out.println("");
     	//Logica.crearLlavesAntes(key, data);
-        Logica.crearSubListas(caracteres);
+        //Logica.crearSubListas(caracteres);
     }
 }

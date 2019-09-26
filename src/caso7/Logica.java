@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Logica {
+	/*
 	public static ArrayList<ArrayList<String>> listaDividida = new ArrayList<>();
 	
 	public static void crearSubListas(ArrayList<String> caracteres) {
@@ -23,14 +24,17 @@ public class Logica {
 		}
 	}
 	
+	
+	
 	public static void tanteo2() {
 		boolean llaveEncontrada = false;
 		String resultado = "";
 		Random r = new Random();
 		int canTanteos = 0;
-		while (!llaveEncontrada) {
+		while (!llaveEncontrada && listaDividida.size() != 0) {
 			int pos = r.nextInt(listaDividida.size());
 			ArrayList<String> actual = listaDividida.get(pos);
+			listaDividida.remove(pos);
 			for (String caracter:actual) {
 				for (int intento=0; intento<4; intento++) {
 					String numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
@@ -100,4 +104,5 @@ public class Logica {
         }
         System.out.println("Numero de intentos: " + intentos);
     }
+    */
 }
