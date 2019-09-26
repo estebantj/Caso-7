@@ -14,7 +14,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
 
 public class Caso7 {
-	public static SecretKeySpec secretKey;
     public static String data;
     public static String key;
     public static ArrayList<Probabilidades> caracteres;
@@ -41,12 +40,12 @@ public class Caso7 {
 		char charV = 'a';
 		for (int i=1;i<cantLetras-1;i++) {
 			caracteres.add(new Probabilidades(String.valueOf(charV), 1.0/(double) (cantLetras)));
-			charV += i;
+			charV ++;
 		}
 		char num = '1';
 		for (int i=1; i<9; i++) {
 			caracteres.add(new Probabilidades(String.valueOf(num), 1.0/ (double) (cantDigitos)));
-			num += i;
+			num ++;
 		}
 	}
    
