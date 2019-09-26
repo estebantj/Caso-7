@@ -29,4 +29,9 @@ public class Probabilidades implements Comparable< Probabilidades >{
     public int compareTo(Probabilidades o) {
         return this.getPrioridad().compareTo(o.getPrioridad());
     }
+	
+	@Override
+    public String toString() {
+        return "Caracter: " + caracter + " y la Prioridad: " + prioridad;
+    }
 }

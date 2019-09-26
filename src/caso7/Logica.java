@@ -69,11 +69,12 @@ public class Logica {
 		    } else {
 		        sublist = listaDividida.get(listaDividida.size() - 1);
 		    }
-		    sublist.add(new Probabilidades(caracteres.get(i), r.nextInt((int)Math.pow(caracteres.size(), 3))));
+		    sublist.add(new Probabilidades(caracteres.get(i), r.nextInt((int)Math.pow(caracteres.size(), 2))));
+		    
 		}
 		
 		for (int i = 0; i < 10; i++) {
-			listaNumeros.add(new Probabilidades(String.valueOf(i), r.nextInt((int)Math.pow(Caso7.digitos.size(), 3))));
+			listaNumeros.add(new Probabilidades(String.valueOf(i), r.nextInt((int)Math.pow(Caso7.digitos.size(), 2))));
 		}
 		
 		while(true) {
@@ -94,8 +95,6 @@ public class Logica {
 					Collections.sort(actual);
 					Collections.sort(listaNumeros);
 					
-					//numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
-					
 					String nCopia = Caso7.key.substring(0,7) + actual.get(caracter).getCaracter() + Caso7.key.substring(8,11) + listaNumeros.get(intento).getCaracter() + Caso7.key.substring(12);
 	                
 					resultado = Caso7.decrypt(Caso7.data, nCopia);
@@ -105,10 +104,10 @@ public class Logica {
                 	
 	                if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
 	                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
-	                	if(tempCaracteres != 0) {
+	                	if(tempCaracteres > 0) {
 	                		listaDividida.get(pos).get(intento).setPrioridad(tempCaracteres - r.nextInt(tempCaracteres - 1));		                	
 	                	}
-	                	if(tempNumeros != 0) {
+	                	if(tempNumeros > 0) {
 	                		listaNumeros.get(pos).setPrioridad(tempNumeros - r.nextInt(tempNumeros - 1));
 	                	}
 	                	llaveEncontrada = true;
