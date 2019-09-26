@@ -6,7 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -20,7 +19,8 @@ public class Caso7 {
     public static String key;
     public static ArrayList<String> caracteres;
     public static ArrayList<String> digitos;
-    public static ArrayList<ArrayList<String> > grupos;
+    public static List<List<String> > grupos;
+    public static int cantLetras;
     
     Caso7() {
         secretKey = null;
@@ -28,10 +28,10 @@ public class Caso7 {
         key = "29dh120_dk1_3";
         caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
         digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
-        //Collections.shuffle(caracteres);
+        grupos = new ArrayList<>();
     }
     
-    private void setKey(String myKey) {
+    private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
             byte[] local_key = myKey.getBytes("UTF-8");
@@ -45,12 +45,12 @@ public class Caso7 {
         }
     }
 
-    public String decrypt(String input, String key) {
+    public static String decrypt(String input, String key) {
         byte[] output = null;
         try {
             java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             setKey(key);
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             output = cipher.doFinal(decoder.decode(input));
         } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
@@ -62,26 +62,7 @@ public class Caso7 {
     
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
-        Logica.tantear(caracteres, digitos);
-        
-        /*
-        char charV = 'a';
-        int intentos = 0;
-        for(int i = 0; i < 26; i++){
-            String nCopia = key.substring(0,7) + charV + key.substring(8);
-            for(int j = 0; j < 10; j++){
-                String nCopia2 = nCopia.substring(0,11) + j + nCopia.substring(12);
-                try{
-                    System.out.println("Intento numero " + i + "." + j + ": " + caso.decrypt(data, nCopia2));
-                }
-                catch(NullPointerException e){
-                    //System.out.println("ERROR: " + nCopia2);
-                }
-                intentos++;
-            }
-            charV++;
-        }
-        System.out.println("Numero de intentos: " + intentos);
-        */
+    	//Logica.crearLlavesAntes(key, data);
+        Logica.crearSubListas(caracteres);
     }
 }
