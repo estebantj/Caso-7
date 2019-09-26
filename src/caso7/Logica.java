@@ -76,6 +76,13 @@ public class Logica {
                 }
                 
 				canTanteos++;
+<<<<<<< HEAD
+=======
+				if(!resultado.equals("-1")) {
+					llaveEncontrada = true;
+					break;
+				}
+>>>>>>> Tony
 			}
 		}
 		System.out.println("Cantidad de tanteos: " + canTanteos);
