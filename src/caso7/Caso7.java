@@ -48,6 +48,7 @@ public class Caso7 {
         byte[] output = null;
         try {
             java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
+            setKey(key);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             output = cipher.doFinal(decoder.decode(input));
@@ -58,29 +59,11 @@ public class Caso7 {
         return new String(output);
     }
     
+    
+    
     public static void main(String[] args) {
-    	//Caso7 caso = new Caso7();
-    	setKey(key);
+    	Caso7 caso = new Caso7();
+    	//Logica.crearLlavesAntes(key, data);
         Logica.crearSubListas(caracteres);
-        
-        /*
-        char charV = 'a';
-        int intentos = 0;
-        for(int i = 0; i < 26; i++){
-            String nCopia = key.substring(0,7) + charV + key.substring(8);
-            for(int j = 0; j < 10; j++){
-                String nCopia2 = nCopia.substring(0,11) + j + nCopia.substring(12);
-                try{
-                    System.out.println("Intento numero " + i + "." + j + ": " + caso.decrypt(data, nCopia2));
-                }
-                catch(NullPointerException e){
-                    //System.out.println("ERROR: " + nCopia2);
-                }
-                intentos++;
-            }
-            charV++;
-        }
-        System.out.println("Numero de intentos: " + intentos);
-        */
     }
 }
