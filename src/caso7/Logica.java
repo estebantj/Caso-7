@@ -8,7 +8,7 @@ public class Logica {
 	public static ArrayList<Probabilidades> listaNumeros = new ArrayList<>();
 	public static Double probaCaracteres = 0.0384;
 	public static Double probaNumeros = 0.1;
-	//public static String numV = "";
+	public static String numV = "";
 	
 	/*
 	public static void crearSubListas(ArrayList<String> caracteres) {
@@ -65,16 +65,11 @@ public class Logica {
 						numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
 					}
 					else {
-						numV = listaNumeros.get(0).getCaracter();
-						for(int numeros = 0; numeros < 10; numeros++) {
-							
-						}
+						seleccionarNumero();
 					} 
-					*/
+					 */
+					numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
 					
-					
-					String numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
-
 					String nCopia = Caso7.key.substring(0,7) + actual.get(caracter).getCaracter() + Caso7.key.substring(8,11) + numV + Caso7.key.substring(12);
 	                
 					resultado = Caso7.decrypt(Caso7.data, nCopia);
@@ -96,6 +91,16 @@ public class Logica {
 					canTanteos++;
 				}
 				if (llaveEncontrada) break;
+			}
+		}
+	}
+	
+	public static void seleccionarNumero() {
+		Double probabilidadNum = listaNumeros.get(0).getProbabilidad();
+		numV = listaNumeros.get(0).getCaracter();
+		for(int numeros = 1; numeros < 10; numeros++) {
+			if(probabilidadNum < listaNumeros.get(numeros).getProbabilidad()) {
+				numV = listaNumeros.get(numeros).getCaracter();
 			}
 		}
 	}
