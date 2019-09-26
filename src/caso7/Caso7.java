@@ -21,7 +21,6 @@ public class Caso7 {
     public static String key;
     public static ArrayList<Caracter> caracteres;
     public static ArrayList<Caracter> digitos;
-    public static List<List<String> > grupos;
     public static int cantLetras;
     public static int cantDigitos;
     public static SecretKeySpec secretKey;
@@ -34,7 +33,6 @@ public class Caso7 {
         cantDigitos = 10;
         caracteres = new ArrayList<>();
         digitos = new ArrayList<>();
-        grupos = new ArrayList<>();
         crearCaracteres();
         ordenar();
     }
@@ -48,13 +46,14 @@ public class Caso7 {
 		}
 		char num = '1';
 		for (int i=1; i<9; i++) {
-			caracteres.add(new Caracter(String.valueOf(num), r.nextDouble()));
+			digitos.add(new Caracter(String.valueOf(num), r.nextDouble()));
 			num ++;
 		}
 	}
     
     private void ordenar() {
     	Collections.sort(caracteres, Collections.reverseOrder());
+    	//System.out.println(caracteres);
     }
    
     private static void setKey(String myKey) {
@@ -87,9 +86,12 @@ public class Caso7 {
     }
     
     public static void main(String[] args) {
-    	Caso7 caso = new Caso7();
-    	System.out.println("");
+    	while (true) {
+    		Caso7 caso = new Caso7();
+	    	Logica.crearSubListas(caracteres);
+    		
+    	}
+    	//System.out.println("");
     	//Logica.crearLlavesAntes(key, data);
-        //Logica.crearSubListas(caracteres);
     }
 }

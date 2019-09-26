@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Logica {
-	/*
+	
 	public static ArrayList<ArrayList<Caracter>> listaDividida = new ArrayList<>();
 	
-	public static void crearSubListas(ArrayList<String> caracteres) {
-		for (int i = 0; i < caracteres.size(); i++) {
+	public static void crearSubListas(ArrayList<Caracter> pCaracteres) {
+		for (int i = 0; i < pCaracteres.size(); i++) {
 		    ArrayList<Caracter> sublist;
 		    if (i % 7 == 0) {
 		        sublist = new ArrayList<>();
@@ -16,9 +16,11 @@ public class Logica {
 		    } else {
 		        sublist = listaDividida.get(listaDividida.size() - 1);
 		    }
-		    sublist.add(caracteres.get(i));
+		    sublist.add(pCaracteres.get(i));
 		}
 		//tantear();
+		//System.out.println(listaDividida);
+		tanteo2();
 		
 	}
 	
@@ -28,20 +30,19 @@ public class Logica {
 		boolean llaveEncontrada = false;
 		String resultado = "";
 		Random r = new Random();
-		int canTanteos = 0;
+		int canTanteos = 1;
 		while (!llaveEncontrada && listaDividida.size() != 0) {
 			int pos = r.nextInt(listaDividida.size());
-			ArrayList<String> actual = listaDividida.get(pos);
+			ArrayList<Caracter> actual = listaDividida.get(pos);
 			listaDividida.remove(pos);
-			for (String caracter:actual) {
+			for (Caracter caracter:actual) {
 				for (int intento=0; intento<4; intento++) {
-					String numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
+					String numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size())).getCaracter();
 
-					String nCopia = Caso7.key.substring(0,7) + caracter + Caso7.key.substring(8,11) + numV + Caso7.key.substring(12);
+					String nCopia = Caso7.key.substring(0,7) + caracter.getCaracter() + Caso7.key.substring(8,11) + numV + Caso7.key.substring(12);
 	                
 					resultado = Caso7.decrypt(Caso7.data, nCopia);
-
-	                if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
+					if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
 	                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
 	                	//System.out.println("Letra usada: " + caracter + ", numero usado: " + numV);
 	                	llaveEncontrada = true;
@@ -53,8 +54,9 @@ public class Logica {
 				if (llaveEncontrada) break;
 			}
 		}
+		if (!llaveEncontrada) System.out.println("Llave no encontrada");
 	}
-	
+	/*
 	public static void tantear() {
 		boolean llaveEncontrada = false;
 		String resultado = "";
