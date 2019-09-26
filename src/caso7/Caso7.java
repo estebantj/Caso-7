@@ -63,6 +63,7 @@ public class Caso7 {
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
     	//Logica.crearLlavesAntes(key, data);
-        Logica.crearSubListas(caracteres);
+        //Logica.crearSubListas(caracteres);
+        Logica.crearSubListas2(caracteres);
     }
 }
