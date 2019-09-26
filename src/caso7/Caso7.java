@@ -20,6 +20,7 @@ public class Caso7 {
     public static ArrayList<String> caracteres;
     public static ArrayList<String> digitos;
     public static List<List<String> > grupos;
+    public static int cantLetras;
     
     Caso7() {
         secretKey = null;
@@ -58,8 +59,6 @@ public class Caso7 {
         }
         return new String(output);
     }
-    
-    
     
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();

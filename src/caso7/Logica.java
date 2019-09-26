@@ -17,7 +17,40 @@ public class Logica {
 		    }
 		    sublist.add(caracteres.get(i));
 		}
-		tantear();
+		//tantear();
+		while (true) {
+			tanteo2();			
+		}
+	}
+	
+	public static void tanteo2() {
+		boolean llaveEncontrada = false;
+		String resultado = "";
+		Random r = new Random();
+		int canTanteos = 0;
+		while (!llaveEncontrada) {
+			int pos = r.nextInt(listaDividida.size());
+			ArrayList<String> actual = listaDividida.get(pos);
+			for (String caracter:actual) {
+				for (int intento=0; intento<4; intento++) {
+					String numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
+
+					String nCopia = Caso7.key.substring(0,7) + caracter + Caso7.key.substring(8,11) + numV + Caso7.key.substring(12);
+	                
+					resultado = Caso7.decrypt(Caso7.data, nCopia);
+
+	                if(!resultado.equals("-1")) {
+	                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
+	                	System.out.println("Letra usada: " + caracter + ", numero usado: " + numV);
+	                	llaveEncontrada = true;
+	                	break;
+	                }
+	                
+					canTanteos++;
+				}
+				if (llaveEncontrada) break;
+			}
+		}
 	}
 	
 	public static void tantear() {
@@ -25,8 +58,9 @@ public class Logica {
 		String resultado = "";
 		Random r = new Random();
 		int canTanteos = 0;
-		while (!llaveEncontrada) {
-			ArrayList<String> actual = listaDividida.get(r.nextInt(listaDividida.size()));
+		while (!llaveEncontrada && listaDividida.size() != 0) {
+			int pos = r.nextInt(listaDividida.size());
+			ArrayList<String> actual = listaDividida.get(pos);
 			for (int i = 0; i < actual.size(); i++) {
 				String charV = actual.get(r.nextInt(actual.size()));
 				String numV = Caso7.digitos.get(r.nextInt(Caso7.digitos.size()));
@@ -34,13 +68,14 @@ public class Logica {
 				String nCopia = Caso7.key.substring(0,7) + charV + Caso7.key.substring(8,11) + numV + Caso7.key.substring(12);
                 
 				resultado = Caso7.decrypt(Caso7.data, nCopia);
-				System.out.println("Intento numero " + canTanteos + ": " + resultado);
-                System.out.println("Letra usada: " + charV + ", numero usado: " + numV);
+
+                if(!resultado.equals("-1")) {
+                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
+                	System.out.println("Letra usada: " + charV + ", numero usado: " + numV);
+                	llaveEncontrada = true;
+                }
                 
 				canTanteos++;
-			}
-			if(!resultado.equals("-1")) {
-				llaveEncontrada = true;
 			}
 		}
 		System.out.println("Cantidad de tanteos: " + canTanteos);
