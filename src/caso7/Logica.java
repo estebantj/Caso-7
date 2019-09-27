@@ -60,7 +60,6 @@ public class Logica {
 						llaveEncontrada = true;
 	                	break;
 	                }
-	                
 					canTanteos++;
 				}
 				if (llaveEncontrada) break;
@@ -70,11 +69,11 @@ public class Logica {
 			System.out.println("Llave no encontrada: "+canTanteos);
 			System.out.print("La clave se encuentra en las siguientes combinaciones: ");
 			char charV = 'a';
-			for (int i=1;i<Caso7.cantLetras;i++) {
-				for (int j=1;j<Caso7.cantDigitos;j++) {
-					String[] combinacion = {String.valueOf(charV), Integer.toString(j)}; 
+			for (int aumentoDeCaracter=1;aumentoDeCaracter<Caso7.cantLetras;aumentoDeCaracter++) {
+				for (int digito=1;digito<Caso7.cantDigitos;digito++) {
+					String[] combinacion = {String.valueOf(charV), Integer.toString(digito)}; 
 					if (!combinacionesRealizadas.contains(combinacion)) {
-						System.out.print("{"+charV+", "+j+"}");
+						System.out.print("{"+charV+", "+digito+"}");
 					}
 				}
 				charV++;
