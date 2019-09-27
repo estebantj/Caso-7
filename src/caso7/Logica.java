@@ -73,6 +73,17 @@ public class Logica {
 				System.out.println(combinacion[0]+" "+combinacion[1]);
 			}
 			*/
+			System.out.println("La clave se encuentra en las siguientes combinaciones: ");
+			char charV = 'a';
+			for (int i=1;i<Caso7.cantLetras;i++) {
+				for (int j=1;j<Caso7.cantDigitos;j++) {
+					String[] combinacion = {String.valueOf(charV), Integer.toString(j)}; 
+					if (!combinacionesRealizadas.contains(combinacion)) {
+						System.out.print("{"+charV+", "+j+"}");
+					}
+				}
+				charV++;
+			}
 		}
 	}
 }
