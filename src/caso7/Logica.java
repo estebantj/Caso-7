@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Logica {
 	
 	public static ArrayList<ArrayList<Caracter>> listaDividida = new ArrayList<>();
+	public static ArrayList<String[]> combinacionesRealizadas = new ArrayList<>();
 	
 	public static void crearSubListas(ArrayList<Caracter> pCaracteres) {
 		for (int i = 0; i < pCaracteres.size(); i++) {
@@ -26,14 +27,31 @@ public class Logica {
 		String resultado = "";
 		int canTanteos = 1;
 		while (!llaveEncontrada && listaDividida.size() != 0) {
+			// Primero se toma una de las sublistas de la listaDivididida y se elimina de esta para evitar repetir combinaciones
 			int pos = ThreadLocalRandom.current().nextInt(0, listaDividida.size());
 			ArrayList<Caracter> actual = listaDividida.get(pos);
 			listaDividida.remove(pos);
-			for (Caracter caracter:actual) {
+			// Por cada caracter de la sublista se hacen cuatro intentos
+			for (Caracter caracterActual:actual) {
+				ArrayList<String> digitosUtilizados = new ArrayList<>();
 				for (int intento=0; intento<4; intento++) {
-					String numV = Caso7.digitos.get(ThreadLocalRandom.current().nextInt(0, Caso7.digitos.size())).getCaracter();
-					//System.out.println(numV);
-					String nCopia = Caso7.key.substring(0,7) + caracter.getCaracter() + Caso7.key.substring(8,11) + numV + Caso7.key.substring(12);
+					Caracter numV = Caso7.digitos.get(ThreadLocalRandom.current().nextInt(0, Caso7.digitos.size()));
+					/*
+					 	Para evitar que se repita un intento se sigue realizando un random hasta obtener un digito que no ha sido utilizado
+					 con el caracter
+					*/
+					while (digitosUtilizados.contains(numV.getCaracter()) ) {
+						numV = Caso7.digitos.get(ThreadLocalRandom.current().nextInt(0, Caso7.digitos.size()));
+						if (!digitosUtilizados.contains(numV.getCaracter())) {
+							break;
+						}
+					}
+					digitosUtilizados.add(numV.getCaracter());
+					String[] combinacion = {caracterActual.getCaracter(), numV.getCaracter()};
+					combinacionesRealizadas.add(combinacion);
+					
+					String nCopia = Caso7.key.substring(0,7) + caracterActual.getCaracter() 
+						+ Caso7.key.substring(8,11) + numV.getCaracter() + Caso7.key.substring(12);
 	                
 					resultado = Caso7.decrypt(Caso7.data, nCopia);
 					if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
@@ -48,6 +66,11 @@ public class Logica {
 				if (llaveEncontrada) break;
 			}
 		}
-		if (!llaveEncontrada) System.out.println("Llave no encontrada: "+canTanteos);
+		if (!llaveEncontrada) {
+			System.out.println("Llave no encontrada: "+canTanteos);
+			for (String[] combinacion: combinacionesRealizadas) {
+				System.out.println(combinacion[0]+" "+combinacion[1]);
+			}
+		}
 	}
 }

@@ -81,9 +81,9 @@ public class Caso7 {
         crearCaracteres();
         ordenar();
         Logica logic = new Logica();
+        logic.crearSubListas(caracteres);	
+        logic.tanteo();
     	while (true) {
-    		logic.crearSubListas(caracteres);	
-    		logic.tanteo();
     	}
     	//System.out.println("");
     	//Logica.crearLlavesAntes(key, data);
