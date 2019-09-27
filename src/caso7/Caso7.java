@@ -6,35 +6,29 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.List;
 
 public class Caso7 {
-	public static SecretKeySpec secretKey;
+	
+    public static ArrayList<String> caracteres;
+    public static ArrayList<String> numeros;
+    public static SecretKeySpec secretKey;
     public static String data;
     public static String key;
-    public static ArrayList<String> caracteres;
-    public static ArrayList<String> digitos;
-    public static List<List<String> > grupos;
-    public static int cantLetras;
     
     Caso7() {
-        secretKey = null;
-        data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
+    	data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
+    	caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
+        numeros = new ArrayList<>(Arrays.asList("0123456789".split("")));
         key = "29dh120_dk1_3";
-        caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
-        //Collections.shuffle(caracteres);
-        digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
-        //Collections.shuffle(digitos);
-        grupos = new ArrayList<>();
+        secretKey = null;
     }
-    
+     
     private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
@@ -66,8 +60,6 @@ public class Caso7 {
     
     public static void main(String[] args) {
     	Caso7 caso = new Caso7();
-    	//Logica.crearLlavesAntes(key, data);
-        //Logica.crearSubListas(caracteres);
-        Logica.crearSubListas2(caracteres);
+        Logica.crearSubListas(caracteres, numeros);
     }
 }
