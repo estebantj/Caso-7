@@ -68,9 +68,11 @@ public class Logica {
 		}
 		if (!llaveEncontrada) {
 			System.out.println("Llave no encontrada: "+canTanteos);
+			/*
 			for (String[] combinacion: combinacionesRealizadas) {
 				System.out.println(combinacion[0]+" "+combinacion[1]);
 			}
+			*/
 		}
 	}
 }
