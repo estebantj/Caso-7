@@ -15,6 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Caso7 {
     public static String data;
@@ -25,35 +26,20 @@ public class Caso7 {
     public static int cantDigitos;
     public static SecretKeySpec secretKey;
     
-    Caso7() {
-        secretKey = null;
-        data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
-        key = "29dh120_dk1_3";
-        cantLetras = 26;
-        cantDigitos = 10;
-        caracteres = new ArrayList<>();
-        digitos = new ArrayList<>();
-        crearCaracteres();
-        ordenar();
-    }
-    
-    private void crearCaracteres() {
-    	Random r = new Random();
+    private static void crearCaracteres() {
 		char charV = 'a';
 		for (int i=1;i<cantLetras-1;i++) {
-			caracteres.add(new Caracter(String.valueOf(charV), r.nextDouble()));
+			caracteres.add(new Caracter(String.valueOf(charV), ThreadLocalRandom.current().nextDouble()));
 			charV ++;
 		}
-		char num = '1';
-		for (int i=1; i<9; i++) {
-			digitos.add(new Caracter(String.valueOf(num), r.nextDouble()));
-			num ++;
+		for (int i=1; i<=9; i++) {
+			digitos.add(new Caracter(Integer.toString(i), ThreadLocalRandom.current().nextDouble() ));
 		}
 	}
     
-    private void ordenar() {
+    private static void ordenar() {
     	Collections.sort(caracteres, Collections.reverseOrder());
-    	//System.out.println(caracteres);
+    	Collections.sort(digitos, Collections.reverseOrder());
     }
    
     private static void setKey(String myKey) {
@@ -79,17 +65,25 @@ public class Caso7 {
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             output = cipher.doFinal(decoder.decode(input));
         } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            //System.out.println(e.toString());
         	return new String("-1");
         }
         return new String(output);
     }
     
     public static void main(String[] args) {
+    	secretKey = null;
+        data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
+        key = "29dh120_dk1_3";
+        cantLetras = 26;
+        cantDigitos = 10;
+        caracteres = new ArrayList<>();
+        digitos = new ArrayList<>();
+        crearCaracteres();
+        ordenar();
+        Logica logic = new Logica();
     	while (true) {
-    		Caso7 caso = new Caso7();
-	    	Logica.crearSubListas(caracteres);
-    		
+    		logic.crearSubListas(caracteres);	
+    		logic.tanteo();
     	}
     	//System.out.println("");
     	//Logica.crearLlavesAntes(key, data);

@@ -2,11 +2,11 @@ package caso7;
 
 public class Caracter implements Comparable< Caracter > {
 	String caracter;
-	double proba;
+	double probabilidad;
 	
 	Caracter(String pCaracter, double pProba) {
 		caracter=  pCaracter;
-		proba = pProba;
+		probabilidad = pProba;
 	}
 		
 	public String getCaracter() {
@@ -14,16 +14,16 @@ public class Caracter implements Comparable< Caracter > {
 	}
 
 	public double getProba() {
-		return proba;
+		return probabilidad;
 	}
 
 	public void setProba(double proba) {
-		this.proba = proba;
+		this.probabilidad = proba;
 	}
 
 	@Override
 	public String toString() {
-		return "Caracter [caracter=" + caracter + ", proba=" + proba + "]";
+		return "Caracter [caracter=" + caracter + ", proba=" + probabilidad + "]";
 	}
 
 	@Override
