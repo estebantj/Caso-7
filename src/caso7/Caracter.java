@@ -21,11 +21,18 @@ public class Caracter implements Comparable< Caracter > {
 		this.probabilidad = proba;
 	}
 
+	/*
 	@Override
 	public String toString() {
 		return "Caracter [caracter=" + caracter + ", proba=" + probabilidad + "]";
 	}
+	*/
 
+	@Override
+	public String toString() {
+		return caracter;
+	}
+	
 	@Override
 	public int compareTo(Caracter e) {
 		if (this.getProba() < e.getProba()) return -1;
