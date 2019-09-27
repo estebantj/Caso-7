@@ -23,18 +23,13 @@ public class Logica {
 		for (int i = 0; i < 10; i++) {
 			listaNumeros.add(new Probabilidades(String.valueOf(i), ThreadLocalRandom.current().nextInt(digitos.size(), digitos.size()*10)));
 		}
-		
-//		for(int i = 0; i < listaDividida.size(); i++)
-//			System.out.println("Porcentaje Letra: " + listaDividida.get(i));
-//    	for(int p = 0; p < listaNumeros.size(); p++)
-//			System.out.println("Porcentaje Numero: " + listaNumeros.get(p));
-		
+
 		//tanteoDeLlaves();
 		for(int i = 0; i < 10; i++) {
 			tanteoDeLlaves();
 		}
-	}
-	
+	} 
+	 
 	public static void tanteoDeLlaves() {
 		int canTanteos = 0;
 		boolean llaveEncontrada = false;
@@ -80,9 +75,9 @@ public class Logica {
 //	                	System.out.println("Porcentaje Letra: " + porCaracterActual);
 //	                	System.out.println("Porcentaje Numero: " + porNumeroActual);
 	                	
-	                	listaActualLetras.get(intento).setPrioridad(ThreadLocalRandom.current().nextInt(porCaracterActual, listaActualLetras.get(listaActualLetras.size()-1).getPrioridad()));
+	                	listaActualLetras.get(intento).setPrioridad(ThreadLocalRandom.current().nextInt(porCaracterActual, porCaracterActual + 10));
 	                	
-	                	listaNumeros.get(posListaActual).setPrioridad(ThreadLocalRandom.current().nextInt(porNumeroActual, listaNumeros.get(listaNumeros.size()-1).getPrioridad()));
+	                	listaNumeros.get(posListaActual).setPrioridad(ThreadLocalRandom.current().nextInt(porNumeroActual, porNumeroActual + 10));
 	                	 
 //	                	System.out.println("Porcentaje Letra: " + porCaracterActual);
 //	                	System.out.println("Porcentaje Numero: " + porNumeroActual);
