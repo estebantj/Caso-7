@@ -24,15 +24,15 @@ public class Logica {
 	
 	public static boolean buscarCombinacion(String[] pCombinacion) {
 		for (String[] combinacion: combinacionesRealizadas) {
-			if ((combinacion[0] == pCombinacion[0]) && (combinacion[1] == pCombinacion[1])) {
-				return true;
-			}
+			if ((combinacion[0].equalsIgnoreCase(pCombinacion[0])) && (combinacion[1].equalsIgnoreCase(pCombinacion[1]))) {
+                return true;
+            }
 		}
 		return false;
 	}
 	
 	public static void tanteo() {
-
+		combinacionesRealizadas.clear();
 		boolean llaveEncontrada = false;
 		String resultado = "";
 		int canTanteos = 1;
@@ -77,16 +77,14 @@ public class Logica {
 			}
 		}
 		if (!llaveEncontrada) {
-			for (String[] combinacion: combinacionesRealizadas) {
-				System.out.println(combinacion[0]+" "+combinacion[1]);
-			}
+			
 			System.out.println("Llave no encontrada");
 			System.out.print("La clave se encuentra en las siguientes combinaciones: ");
 			char charV = 'a';
 			for (int aumentoDeCaracter=1;aumentoDeCaracter<Caso7.cantLetras;aumentoDeCaracter++) {
 				for (int digito=1;digito<Caso7.cantDigitos;digito++) {
 					String[] combinacion = {String.valueOf(charV), Integer.toString(digito)}; 
-					if (!buscarCombinacion(combinacion)) {
+					if (buscarCombinacion(combinacion)) {
 						System.out.print("{"+charV+", "+digito+"}");
 					}
 				}
