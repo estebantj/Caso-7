@@ -32,7 +32,7 @@ public class Logica {
 			ArrayList<Caracter> actual = listaDividida.get(pos);
 			listaDividida.remove(pos);
 			// Por cada caracter de la sublista se hacen cuatro intentos
-			for (Caracter caracterActual:actual) {
+			for (Caracter caracterActual: actual) {
 				ArrayList<String> digitosUtilizados = new ArrayList<>();
 				for (int intento=0; intento<4; intento++) {
 					Caracter numV = Caso7.digitos.get(ThreadLocalRandom.current().nextInt(0, Caso7.digitos.size()));
@@ -68,12 +68,7 @@ public class Logica {
 		}
 		if (!llaveEncontrada) {
 			System.out.println("Llave no encontrada: "+canTanteos);
-			/*
-			for (String[] combinacion: combinacionesRealizadas) {
-				System.out.println(combinacion[0]+" "+combinacion[1]);
-			}
-			*/
-			System.out.println("La clave se encuentra en las siguientes combinaciones: ");
+			System.out.print("La clave se encuentra en las siguientes combinaciones: ");
 			char charV = 'a';
 			for (int i=1;i<Caso7.cantLetras;i++) {
 				for (int j=1;j<Caso7.cantDigitos;j++) {
@@ -84,6 +79,7 @@ public class Logica {
 				}
 				charV++;
 			}
+			
 		}
 	}
 }
