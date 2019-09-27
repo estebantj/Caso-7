@@ -22,7 +22,17 @@ public class Logica {
 		}
 	}
 	
+	public static boolean buscarCombinacion(String[] pCombinacion) {
+		for (String[] combinacion: combinacionesRealizadas) {
+			if ((combinacion[0] == pCombinacion[0]) && (combinacion[1] == pCombinacion[1])) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void tanteo() {
+
 		boolean llaveEncontrada = false;
 		String resultado = "";
 		int canTanteos = 1;
@@ -55,8 +65,9 @@ public class Logica {
 	                
 					resultado = Caso7.decrypt(Caso7.data, nCopia);
 					if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
-	                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
-	                	System.out.println("Letra usada: " + caracterActual.getCaracter() + ", numero usado: " + numV.getCaracter() +"\n");
+	                	System.out.println("Llave encontrado en el intento numero: " + canTanteos);
+	                	System.out.println("Texto decifrado: "+resultado+"\n");
+	                	//System.out.println("Letra usada: " + caracterActual.getCaracter() + ", numero usado: " + numV.getCaracter() +"\n");
 						llaveEncontrada = true;
 	                	break;
 	                }
@@ -66,13 +77,16 @@ public class Logica {
 			}
 		}
 		if (!llaveEncontrada) {
-			System.out.println("Llave no encontrada: "+canTanteos);
+			for (String[] combinacion: combinacionesRealizadas) {
+				System.out.println(combinacion[0]+" "+combinacion[1]);
+			}
+			System.out.println("Llave no encontrada");
 			System.out.print("La clave se encuentra en las siguientes combinaciones: ");
 			char charV = 'a';
 			for (int aumentoDeCaracter=1;aumentoDeCaracter<Caso7.cantLetras;aumentoDeCaracter++) {
 				for (int digito=1;digito<Caso7.cantDigitos;digito++) {
 					String[] combinacion = {String.valueOf(charV), Integer.toString(digito)}; 
-					if (!combinacionesRealizadas.contains(combinacion)) {
+					if (!buscarCombinacion(combinacion)) {
 						System.out.print("{"+charV+", "+digito+"}");
 					}
 				}
