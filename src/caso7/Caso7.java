@@ -28,7 +28,7 @@ public class Caso7 {
     
     private static void crearCaracteres() {
 		char charV = 'a';
-		for (int i=1;i<cantLetras-1;i++) {
+		for (int i=1;i<=cantLetras;i++) {
 			caracteres.add(new Caracter(String.valueOf(charV), ThreadLocalRandom.current().nextDouble()));
 			charV ++;
 		}
@@ -81,11 +81,10 @@ public class Caso7 {
         crearCaracteres();
         ordenar();
         Logica logic = new Logica();
-    	while (true) {
-    		logic.crearSubListas(caracteres);	
-    		logic.tanteo();
-    	}
-    	//System.out.println("");
-    	//Logica.crearLlavesAntes(key, data);
+        for(int intento=1;intento<=20;intento++) {
+        	System.out.println("---------------- Intento #"+intento+"-------------------");
+        	logic.crearSubListas(caracteres);	
+        	logic.tanteo();
+        }
     }
 }
