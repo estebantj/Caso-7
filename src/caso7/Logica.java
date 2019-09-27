@@ -1,25 +1,78 @@
 package caso7;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Logica {
-	public static String tanteo;
 	
-	public static ArrayList<ArrayList<String>> lista = new ArrayList<>();
+	public static ArrayList<ArrayList<Caracter>> listaDividida = new ArrayList<>();
+	public static ArrayList<String[]> combinacionesRealizadas = new ArrayList<>();
 	
-	public static void tantear(ArrayList<String> caracteres, ArrayList<String> digitos) {
-		System.out.println("Prueba Antes de la division: " + caracteres.get(1));
-		for (int i = 0; i < caracteres.size(); i++) {
-		    ArrayList<String> sublist;
+	public static void crearSubListas(ArrayList<Caracter> pCaracteres) {
+		for (int i = 0; i < pCaracteres.size(); i++) {
+		    ArrayList<Caracter> sublist;
 		    if (i % 7 == 0) {
-		        sublist = new ArrayList<String>();
-		        lista.add(sublist);
+		        sublist = new ArrayList<>();
+		        listaDividida.add(sublist);
 		    } else {
-		        sublist = lista.get(lista.size() - 1);
+		        sublist = listaDividida.get(listaDividida.size() - 1);
 		    }
-		    sublist.add(caracteres.get(i));
+		    sublist.add(pCaracteres.get(i));
 		}
-		
-		System.out.println("Prueba Despues de la division: " + lista.get(0).get(1));
+	}
+	
+	public static void tanteo() {
+		boolean llaveEncontrada = false;
+		String resultado = "";
+		int canTanteos = 1;
+		while (!llaveEncontrada && listaDividida.size() != 0) {
+			// Primero se toma una de las sublistas de la listaDivididida y se elimina de esta para evitar repetir combinaciones
+			int pos = ThreadLocalRandom.current().nextInt(0, listaDividida.size());
+			ArrayList<Caracter> actual = listaDividida.get(pos);
+			listaDividida.remove(pos);
+			// Por cada caracter de la sublista se hacen cuatro intentos
+			for (Caracter caracterActual:actual) {
+				ArrayList<String> digitosUtilizados = new ArrayList<>();
+				for (int intento=0; intento<4; intento++) {
+					Caracter numV = Caso7.digitos.get(ThreadLocalRandom.current().nextInt(0, Caso7.digitos.size()));
+					/*
+					 	Para evitar que se repita un intento se sigue realizando un random hasta obtener un digito que no ha sido utilizado
+					 con el caracter
+					*/
+					while (digitosUtilizados.contains(numV.getCaracter()) ) {
+						numV = Caso7.digitos.get(ThreadLocalRandom.current().nextInt(0, Caso7.digitos.size()));
+						if (!digitosUtilizados.contains(numV.getCaracter())) {
+							break;
+						}
+					}
+					digitosUtilizados.add(numV.getCaracter());
+					String[] combinacion = {caracterActual.getCaracter(), numV.getCaracter()};
+					combinacionesRealizadas.add(combinacion);
+					
+					String nCopia = Caso7.key.substring(0,7) + caracterActual.getCaracter() 
+						+ Caso7.key.substring(8,11) + numV.getCaracter() + Caso7.key.substring(12);
+	                
+					resultado = Caso7.decrypt(Caso7.data, nCopia);
+					if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
+	                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
+	                	//System.out.println("Letra usada: " + caracter + ", numero usado: " + numV);
+						llaveEncontrada = true;
+	                	break;
+	                }
+	                
+					canTanteos++;
+				}
+				if (llaveEncontrada) break;
+			}
+		}
+		if (!llaveEncontrada) {
+			System.out.println("Llave no encontrada: "+canTanteos);
+			/*
+			for (String[] combinacion: combinacionesRealizadas) {
+				System.out.println(combinacion[0]+" "+combinacion[1]);
+			}
+			*/
+		}
 	}
 }

@@ -7,31 +7,42 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Caso7 {
-	public static SecretKeySpec secretKey;
     public static String data;
     public static String key;
-    public static ArrayList<String> caracteres;
-    public static ArrayList<String> digitos;
-    public static ArrayList<ArrayList<String> > grupos;
+    public static ArrayList<Caracter> caracteres;
+    public static ArrayList<Caracter> digitos;
+    public static int cantLetras;
+    public static int cantDigitos;
+    public static SecretKeySpec secretKey;
     
-    Caso7() {
-        secretKey = null;
-        data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
-        key = "29dh120_dk1_3";
-        caracteres = new ArrayList<>(Arrays.asList("abcdefghijklmnopqrstuvwxyz".split("")));
-        digitos = new ArrayList<>(Arrays.asList("0123456789".split("")));
-        //Collections.shuffle(caracteres);
+    private static void crearCaracteres() {
+		char charV = 'a';
+		for (int i=1;i<cantLetras-1;i++) {
+			caracteres.add(new Caracter(String.valueOf(charV), ThreadLocalRandom.current().nextDouble()));
+			charV ++;
+		}
+		for (int i=1; i<=9; i++) {
+			digitos.add(new Caracter(Integer.toString(i), ThreadLocalRandom.current().nextDouble() ));
+		}
+	}
+    
+    private static void ordenar() {
+    	Collections.sort(caracteres, Collections.reverseOrder());
+    	Collections.sort(digitos, Collections.reverseOrder());
     }
-    
-    private void setKey(String myKey) {
+   
+    private static void setKey(String myKey) {
         MessageDigest sha = null;
         try {
             byte[] local_key = myKey.getBytes("UTF-8");
@@ -45,43 +56,36 @@ public class Caso7 {
         }
     }
 
-    public String decrypt(String input, String key) {
+    public static String decrypt(String input, String key) {
         byte[] output = null;
         try {
             java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             setKey(key);
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             output = cipher.doFinal(decoder.decode(input));
         } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            //System.out.println(e.toString());
         	return new String("-1");
         }
         return new String(output);
     }
     
     public static void main(String[] args) {
-    	Caso7 caso = new Caso7();
-        Logica.tantear(caracteres, digitos);
-        
-        /*
-        char charV = 'a';
-        int intentos = 0;
-        for(int i = 0; i < 26; i++){
-            String nCopia = key.substring(0,7) + charV + key.substring(8);
-            for(int j = 0; j < 10; j++){
-                String nCopia2 = nCopia.substring(0,11) + j + nCopia.substring(12);
-                try{
-                    System.out.println("Intento numero " + i + "." + j + ": " + caso.decrypt(data, nCopia2));
-                }
-                catch(NullPointerException e){
-                    //System.out.println("ERROR: " + nCopia2);
-                }
-                intentos++;
-            }
-            charV++;
-        }
-        System.out.println("Numero de intentos: " + intentos);
-        */
+    	secretKey = null;
+        data  = "xZwM7BWIpSjYyGFr9rhpEa+cYVtACW7yQKmyN6OYSCv0ZEg9jWbc6lKzzCxRSSIvOvlimQZBMZOYnOwiA9yy3YU8zk4abFSItoW6Wj0ufQ0=";
+        key = "29dh120_dk1_3";
+        cantLetras = 26;
+        cantDigitos = 10;
+        caracteres = new ArrayList<>();
+        digitos = new ArrayList<>();
+        crearCaracteres();
+        ordenar();
+        Logica logic = new Logica();
+    	while (true) {
+    		logic.crearSubListas(caracteres);	
+    		logic.tanteo();
+    	}
+    	//System.out.println("");
+    	//Logica.crearLlavesAntes(key, data);
     }
 }
