@@ -56,7 +56,7 @@ public class Logica {
 					resultado = Caso7.decrypt(Caso7.data, nCopia);
 					if(!resultado.equals("-1") && resultado.equals(resultado.replaceAll("[^\\p{ASCII}]", ""))) {
 	                	System.out.println("Intento numero " + canTanteos + ": " + resultado);
-	                	//System.out.println("Letra usada: " + caracter + ", numero usado: " + numV);
+	                	System.out.println("Letra usada: " + caracterActual.getCaracter() + ", numero usado: " + numV.getCaracter() +"\n");
 						llaveEncontrada = true;
 	                	break;
 	                }
@@ -79,7 +79,7 @@ public class Logica {
 				}
 				charV++;
 			}
-			
+			System.out.println("\n");
 		}
 	}
 }

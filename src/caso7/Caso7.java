@@ -83,8 +83,7 @@ public class Caso7 {
         Logica logic = new Logica();
         while (true) {
         	logic.crearSubListas(caracteres);	
-        	logic.tanteo();       
-        	System.out.println("");        	
+        	logic.tanteo();
         }
     }
 }
